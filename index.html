@@ -7,6 +7,9 @@
     <title>Gerador de bilhetes</title>
     <link rel="stylesheet" href="style.css">
     <script>
+        function dw(texto){
+            document.write(texto);
+        }
         class Bilhetes{
             constructor(){
                 this.titulo = "";
@@ -15,12 +18,13 @@
                 this.data = "";
                 //this.numero_inicial = prompt("A parti de qual bilhete deseja imprimir?")
                 this.numero_inicial = 1;
-                this.contagem = 0;
             }
-            gerar_bilhete(){
-                function dw(texto){
-                    document.write(texto);
-                }
+
+            iniciar(){
+                dw('<div class="area_externa"><div class="area_interna">');
+            }
+
+            exibir_bilhete(){
                 dw('<div class="bilhete">');
                     dw('<div class="left">');
                         dw('<div class="info">');
@@ -40,22 +44,78 @@
                     dw('</div>');
                 dw('</div>');
             }
+
             gerar_todos_bilhetes(){
                 var contagem = 0;
                 while(contagem < 10){
                     contagem++;
-                    this.gerar_bilhete();
+                    this.exibir_bilhete();
                 }
             }
+
+            finalizar(){
+                dw('</div></div>');
+            }
+
         }
-        const bilhete = new Bilhetes();
+        class Numeros{
+            constructor(){
+                this.numero_inicial = 1;
+            }
+
+            definir_numero_inicial(numero){
+                this.numero_inicial = numero;
+            }
+
+            iniciar(){
+                dw('<div class="area_externa"><div class="area_interna">');
+            }
+
+            exibir_numero(numero){
+                var numero_exibir = ("000" + numero).slice(-3);
+                dw('<div class="numero">');
+                    dw('<div class="left">');
+                        dw("<span>" + numero_exibir + "</span>");
+                    dw('</div>');
+                    dw('<div class="right">');
+                        dw("<span>" + numero_exibir + "</span>");
+                    dw('</div>');
+                dw('</div>');
+            }
+
+            gerar_todos_numeros(){
+                var contagem = 0;
+                while(contagem < 10){
+                    contagem++;
+                    this.exibir_numero(this.numero_inicial);
+                    this.numero_inicial++;
+                }
+            }
+
+            finalizar(){
+                dw('</div></div>');
+            }
+
+        }
     </script>
 </head>
-<body onload="window.print()">
-    <div class="area_externa">
-        <div class="area_interna">
-            <script>bilhete.gerar_todos_bilhetes()</script>
-        </div>
-    </div>
+<body>
+    <script>
+        function gerar(){
+            const bilhetes = new Bilhetes();
+            bilhetes.iniciar();
+            bilhetes.gerar_todos_bilhetes();
+            bilhetes.finalizar();
+
+            const numeros = new Numeros();
+            numeros.definir_numero_inicial(10);
+            numeros.iniciar();
+            numeros.gerar_todos_numeros();
+            numeros.finalizar();
+
+            window.print();
+        }
+        gerar();
+        </script>
 </body>
 </html>

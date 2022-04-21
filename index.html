@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerador de bilhetes</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bilhetes.css">
     <script>
         function dw(texto){
             document.write(texto);
@@ -18,6 +18,18 @@
                 this.data = "";
                 //this.numero_inicial = prompt("A parti de qual bilhete deseja imprimir?")
                 this.numero_inicial = 1;
+            }
+            definir_titulo(titulo){
+                this.titulo = titulo;
+            }
+            definir_subtitulo_l1(subtitulo_l1){
+                this.subtitulo_l1 = subtitulo_l1;
+            }
+            definir_subtitulo_l2(subtitulo_l2){
+                this.subtitulo_l2 = subtitulo_l2;
+            }
+            definir_data(data){
+                this.data = data;
             }
 
             iniciar(){
@@ -34,12 +46,12 @@
                     dw('</div>');
                     dw('<div class="right">');
                         dw('<div class="info">')
-                            dw('<h1>TITULO DO SORTEIO</h1>');
+                            dw('<h1>' + this.titulo + '</h1>');
                             dw('<div class="texto_centralizado">')
-                                dw('<span>Subtítulo 1</span>');
-                                dw('<span>Subtítulo 2</span>');
+                                dw('<span>' + this.subtitulo_l1 + '</span>');
+                                dw('<span>' + this.subtitulo_l2 + '</span>');
                             dw('</div>')
-                            dw('<small>Data do sorteio: 00/00/0000</small>')
+                            dw('<small>Data do sorteio: ' + this.data + '</small>')
                         dw('</div>')
                     dw('</div>');
                 dw('</div>');
@@ -100,15 +112,20 @@
     </script>
 </head>
 <body>
+
     <script>
         function gerar(){
             const bilhetes = new Bilhetes();
+            bilhetes.definir_titulo("TITULO DO SORTEIO");
+            bilhetes.definir_subtitulo_l1("Subtítulo 1");
+            bilhetes.definir_subtitulo_l2("Subtítulo 2");
+            bilhetes.definir_data("00/00/0000");
             bilhetes.iniciar();
             bilhetes.gerar_todos_bilhetes();
             bilhetes.finalizar();
 
             const numeros = new Numeros();
-            numeros.definir_numero_inicial(10);
+            numeros.definir_numero_inicial(105);
             numeros.iniciar();
             numeros.gerar_todos_numeros();
             numeros.finalizar();

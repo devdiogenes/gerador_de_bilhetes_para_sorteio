@@ -9,9 +9,14 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     height: 100vh;
 }
 form{
     display: flex;
     flex-direction: column;
+}
+.logo_principal{
+    width: 115px;   
+    margin: 20px; 
 }

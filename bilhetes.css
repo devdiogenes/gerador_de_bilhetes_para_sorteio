@@ -1,15 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
-
-
 .area_externa{
     display: none;
 }
 
 @media print{
-    *{ 
-        padding: 0;
-        margin: 0;  
-        font-family: 'Open Sans', sans-serif;
+    form{
+        display: none;
     }
     .texto_centralizado{
         display: flex;

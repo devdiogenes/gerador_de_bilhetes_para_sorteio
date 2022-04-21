@@ -5,134 +5,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerador de bilhetes</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="bilhetes.css">
-    <script>
-        function dw(texto){
-            document.write(texto);
-        }
-        class Bilhetes{
-            constructor(){
-                this.titulo = "";
-                this.subtitulo_l1 = "";
-                this.subtitulo_l2 = "";
-                this.data = "";
-                //this.numero_inicial = prompt("A parti de qual bilhete deseja imprimir?")
-                this.numero_inicial = 1;
-            }
-            definir_titulo(titulo){
-                this.titulo = titulo;
-            }
-            definir_subtitulo_l1(subtitulo_l1){
-                this.subtitulo_l1 = subtitulo_l1;
-            }
-            definir_subtitulo_l2(subtitulo_l2){
-                this.subtitulo_l2 = subtitulo_l2;
-            }
-            definir_data(data){
-                this.data = data;
-            }
-
-            iniciar(){
-                dw('<div class="area_externa"><div class="area_interna">');
-            }
-
-            exibir_bilhete(){
-                dw('<div class="bilhete">');
-                    dw('<div class="left">');
-                        dw('<div class="info">');
-                            dw('<span>Nome: </span>');
-                            dw('<span>Contato: </span>');
-                        dw('</div>');
-                    dw('</div>');
-                    dw('<div class="right">');
-                        dw('<div class="info">')
-                            dw('<h1>' + this.titulo + '</h1>');
-                            dw('<div class="texto_centralizado">')
-                                dw('<span>' + this.subtitulo_l1 + '</span>');
-                                dw('<span>' + this.subtitulo_l2 + '</span>');
-                            dw('</div>')
-                            dw('<small>Data do sorteio: ' + this.data + '</small>')
-                        dw('</div>')
-                    dw('</div>');
-                dw('</div>');
-            }
-
-            gerar_todos_bilhetes(){
-                var contagem = 0;
-                while(contagem < 10){
-                    contagem++;
-                    this.exibir_bilhete();
-                }
-            }
-
-            finalizar(){
-                dw('</div></div>');
-            }
-
-        }
-        class Numeros{
-            constructor(){
-                this.numero_inicial = 1;
-            }
-
-            definir_numero_inicial(numero){
-                this.numero_inicial = numero;
-            }
-
-            iniciar(){
-                dw('<div class="area_externa"><div class="area_interna">');
-            }
-
-            exibir_numero(numero){
-                var numero_exibir = ("000" + numero).slice(-3);
-                dw('<div class="numero">');
-                    dw('<div class="left">');
-                        dw("<span>" + numero_exibir + "</span>");
-                    dw('</div>');
-                    dw('<div class="right">');
-                        dw("<span>" + numero_exibir + "</span>");
-                    dw('</div>');
-                dw('</div>');
-            }
-
-            gerar_todos_numeros(){
-                var contagem = 0;
-                while(contagem < 10){
-                    contagem++;
-                    this.exibir_numero(this.numero_inicial);
-                    this.numero_inicial++;
-                }
-            }
-
-            finalizar(){
-                dw('</div></div>');
-            }
-
-        }
-    </script>
 </head>
 <body>
-
+    <form id="dados_bilhete">
+        <h1>Gerador de bilhetes para sorteio</h1>
+        </br>
+        <p>Título:</p>
+        <input id="titulo"></input>
+        <p>Subtítulo 1:</p>
+        <input id="subtitulo_l1"></input>
+        <p>Subtítulo 2:</p>
+        <input id="subtitulo_l2"></input>
+        <p>Data do sorteio: </p>
+        <input id="data"></input>
+        <p>Número inicial: </p>
+        <input id="numero_inicial"></input><br/>
+        <input type="button" onclick="gerar(this.parentNode)" value="Gerar"></input>
+    </form>
+    <script src="script.js"></script>
     <script>
-        function gerar(){
-            const bilhetes = new Bilhetes();
-            bilhetes.definir_titulo("TITULO DO SORTEIO");
-            bilhetes.definir_subtitulo_l1("Subtítulo 1");
-            bilhetes.definir_subtitulo_l2("Subtítulo 2");
-            bilhetes.definir_data("00/00/0000");
+
+        function gerar(formulario){
+            
+            corpo.innerText = corpo.innerHTML;
+
+            dados_formulario.definir_formulario(formulario);
+            dados_formulario.ler_dados();
+
+            bilhetes.definir_titulo(dados_formulario.obter_titulo());
+            bilhetes.definir_subtitulo_l1(dados_formulario.obter_subtitulo_l1());
+            bilhetes.definir_subtitulo_l2(dados_formulario.obter_subtitulo_l2());
+            bilhetes.definir_data(dados_formulario.obter_data());
             bilhetes.iniciar();
             bilhetes.gerar_todos_bilhetes();
             bilhetes.finalizar();
 
-            const numeros = new Numeros();
-            numeros.definir_numero_inicial(105);
+            numeros.definir_numero_inicial(dados_formulario.obter_numero_inicial());
             numeros.iniciar();
             numeros.gerar_todos_numeros();
             numeros.finalizar();
 
+            corpo.innerHTML = corpo.innerText
+
             window.print();
+
+            dados_formulario.restaurar_valores();
         }
-        gerar();
-        </script>
+    </script>
 </body>
 </html>

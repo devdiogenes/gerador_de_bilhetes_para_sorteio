@@ -4,31 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de bilhetes</title>
+    <title>Automação de bilhetes</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="bilhetes.css">
 </head>
 <body>
     <form id="dados_bilhete">
-        <h1>Gerador de bilhetes para sorteio</h1>
+        <h1>Automação de bilhetes para sorteio</h1>
         </br>
         <p>Título:</p>
-        <input id="titulo"></input>
+        <input id="titulo" value="Digite aqui o título" onclick="this.value=''"></input>
         <p>Subtítulo 1:</p>
-        <input id="subtitulo_l1"></input>
+        <input id="subtitulo_l1" value="Digite aqui o subtítulo 1" onclick="this.value=''"></input>
         <p>Subtítulo 2:</p>
-        <input id="subtitulo_l2"></input>
+        <input id="subtitulo_l2" value="Digite aqui o subtítulo 2" onclick="this.value=''"></input>
         <p>Data do sorteio: </p>
-        <input id="data"></input>
+        <input id="data" value="01/01/2000" onclick="this.value=''"></input>
         <p>Número inicial: </p>
-        <input id="numero_inicial"></input><br/>
+        <input id="numero_inicial" value="1" onclick="this.value=''"></input><br/>
         <input type="button" onclick="gerar(this.parentNode)" value="Gerar"></input>
     </form>
     <script src="script.js"></script>
     <script>
 
         function gerar(formulario){
-            
+            backup_corpo = corpo.innerHTML;
             corpo.innerText = corpo.innerHTML;
 
             dados_formulario.definir_formulario(formulario);
@@ -48,8 +48,8 @@
             numeros.finalizar();
 
             corpo.innerHTML = corpo.innerText
-
             window.print();
+            corpo.innerHTML = backup_corpo; 
 
             dados_formulario.restaurar_valores();
         }

@@ -3,7 +3,7 @@
 }
 
 @media print{
-    form{
+    form, a{
         display: none;
     }
     .texto_centralizado{

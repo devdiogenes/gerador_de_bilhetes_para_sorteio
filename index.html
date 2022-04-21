@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de bilhetes</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        class Bilhetes{
+            constructor(){
+                this.titulo = "";
+                this.subtitulo_l1 = "";
+                this.subtitulo_l2 = "";
+                this.data = "";
+                //this.numero_inicial = prompt("A parti de qual bilhete deseja imprimir?")
+                this.numero_inicial = 1;
+                this.contagem = 0;
+            }
+            gerar_bilhete(){
+                function dw(texto){
+                    document.write(texto);
+                }
+                dw('<div class="bilhete">');
+                    dw('<div class="left">');
+                        dw('<div class="info">');
+                            dw('<span>Nome: </span>');
+                            dw('<span>Contato: </span>');
+                        dw('</div>');
+                    dw('</div>');
+                    dw('<div class="right">');
+                        dw('<div class="info">')
+                            dw('<h1>TITULO DO SORTEIO</h1>');
+                            dw('<div class="texto_centralizado">')
+                                dw('<span>Subtítulo 1</span>');
+                                dw('<span>Subtítulo 2</span>');
+                            dw('</div>')
+                            dw('<small>Data do sorteio: 00/00/0000</small>')
+                        dw('</div>')
+                    dw('</div>');
+                dw('</div>');
+            }
+            gerar_todos_bilhetes(){
+                var contagem = 0;
+                while(contagem < 10){
+                    contagem++;
+                    this.gerar_bilhete();
+                }
+            }
+        }
+        const bilhete = new Bilhetes();
+    </script>
+</head>
+<body onload="window.print()">
+    <div class="area_externa">
+        <div class="area_interna">
+            <script>bilhete.gerar_todos_bilhetes()</script>
+        </div>
+    </div>
+</body>
+</html>
